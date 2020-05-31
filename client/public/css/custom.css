@@ -1,0 +1,150 @@
+.vheight {
+    min-height: 100vh;
+}
+
+.below {
+    padding-top: 5rem;
+}
+
+#TodoIcon {
+    margin-right: 15px;
+}
+
+.navbar-light {
+    background-color: white !important;
+    padding-top: 10px;
+    padding-bottom: 13px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e3e3e3 !important;
+}
+
+.navbar-brand {
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: 500;
+    font-size: 25px !important;
+    color: rgb(63, 66, 69) !important;
+}
+
+input.form-control {
+    margin-top: 5px;
+    font-family: 'Exo 2 ExtraLight', sans-serif !important;
+    border-radius: 20px;
+}
+
+h1, h6 {
+    font-family: "Open Sans", sans-serif;
+    color: #4f5358;
+}
+
+.list-group-item {
+    background-color: transparent !important;
+    color: slategray !important;
+    font-family: "Open Sans", sans-serif !important;
+    outline: 0;
+!important;
+}
+
+.list-group-item.list-group-item-action {
+    background-color: transparent !important;
+    color: slategray !important;
+    font-family: "Open Sans", sans-serif !important;
+    outline: 0;
+!important;
+}
+
+.list-group-item.active {
+    background-color: transparent !important;
+    border-top: none !important;
+    border-bottom-color: slategray !important;
+    color: rgb(28, 32, 36) !important;
+    outline: 0;
+!important;
+}
+
+.list-group-item:active {
+    background-color: rgb(238, 238, 238) !important;
+    outline: 0;
+!important;
+}
+
+.list-group-item-action:hover {
+    background-color: whitesmoke !important;
+}
+
+#sharedIcon {
+    margin-left: 6px;
+}
+
+.list-title {
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 500;
+    font-size: 18px !important;
+    color: rgb(44, 48, 53) !important;
+}
+
+.badge-pill {
+    font-family: "Josefin Sans", serif !important;
+    font-size: 9pt !important;
+    padding-top: 3px !important;
+    background-color: #efefef !important;
+}
+
+.custom-checkbox .custom-control-input.important ~ .custom-control-label::before {
+    border-color: rgb(146, 215, 130);
+}
+
+.custom-checkbox .custom-control-input.important:checked ~ .custom-control-label::before {
+    background-color: rgb(123, 215, 73);
+}
+
+.custom-checkbox .custom-control-input.important:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgb(171, 243, 119);
+    border-color: rgb(164, 229, 118);
+}
+
+.date {
+    alignment: center !important;
+    font-family: "Raleway Light", sans-serif !important;
+    font-size: 12px;
+}
+
+.date.expired {
+    color: #e74f4f;
+}
+
+#submitButton {
+    border-radius: 19px !important;
+    padding-bottom: 9px !important;
+}
+
+#addButton {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1030;
+    padding: 4px 9pt 5px 9pt;
+    margin: 0 1.5rem 1.5rem 0;
+    border-radius: 50%;
+    font-family: "Google Sans Medium", sans-serif;
+}
+
+.form-group .control-label {
+    font-family: "Open Sans", sans-serif !important;
+}
+
+input:invalid {
+    border: 2px solid #e74f4f;
+}
+
+input:focus:invalid {
+    box-shadow: none;
+}
+
+.img-button {
+    margin: 2px;
+}
+
+/* img buttons */
+.img-button:hover {
+    cursor: pointer;
+}
