@@ -17,10 +17,16 @@
   },
   "homepage": "https://github.com/alsdilorenzo/lab5-rest-express#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "express-jwt": "^5.3.3",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.25.3",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.4",
     "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

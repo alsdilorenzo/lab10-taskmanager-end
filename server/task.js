@@ -2,7 +2,7 @@
 
 class Task {
 
-    constructor(id, description, important, privateTask, project, deadline, completed) {
+    constructor(id, description, important, privateTask, project, deadline, completed, user) {
         if (id) this.id = id
         this.description = description
         this.important = important
@@ -10,6 +10,7 @@ class Task {
         if (project) this.project = project
         if (deadline) this.deadline = deadline
         this.completed = completed || false
+        this.user = user
     }
 
 }

@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-bootstrap";
 
 class App extends React.Component {
 
