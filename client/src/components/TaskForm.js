@@ -1,8 +1,10 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import moment from 'moment';
+import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router';
+import {AuthContext} from '../auth/AuthContext';
 
 class TaskForm extends React.Component {
     constructor(props) {
@@ -23,6 +25,8 @@ class TaskForm extends React.Component {
                 deadlineTime: ''
             };
         }
+
+        this.state.submitted = false;
     }
 
     updateField = (name, value) => {
@@ -37,69 +41,74 @@ class TaskForm extends React.Component {
         } else {
             let task = Object.assign({}, this.state);
             // set a single deadline
-            if (task.deadlineDate !== "" && task.deadlineTime !== "")
+            if (task.deadlineDate && task.deadlineTime && task.deadlineDate !== "" && task.deadlineTime !== "")
                 task.deadline = moment(task.deadlineDate + " " + task.deadlineTime);
-            else if (task.deadlineDate !== "")
+            else if (task.deadlineDate && task.deadlineDate !== "")
                 task.deadline = moment(task.deadlineDate);
-            else task.deadline = ''
+            else task.deadline = '';
 
             this.props.addOrEditTask(task);
-            this.props.showModal();
+            this.setState({submitted: true});
         }
     }
 
     render() {
+        if (this.state.submitted)
+            return <Redirect to='/'/>;
         return (
-            <Modal show={this.props.modalOpen} onHide={this.props.showModal} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Insert Task Data</Modal.Title>
-                </Modal.Header>
-                <Form method="POST" onSubmit={(event) => this.handleSubmit(event)}>
-                    <Modal.Body>
-                        <Form.Group controlId="description">
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control type="text" name="description" placeholder=""
-                                          value={this.state.description}
-                                          onChange={(ev) => this.updateField(ev.target.name, ev.target.value)} required
-                                          autoFocus/>
-                        </Form.Group>
+            <AuthContext.Consumer>
+                {(context) => (
+                    <>
+                        {!this.props.task && <h1>Add a Task</h1>}
+                        {this.props.task && <h1>Update Task</h1>}
 
-                        <Form.Group controlId="project">
-                            <Form.Label>Project</Form.Label>
-                            <Form.Control type="text" name="project" placeholder=""
-                                          value={this.state.project}
-                                          onChange={(ev) => this.updateField(ev.target.name, ev.target.value)}/>
-                        </Form.Group>
+                        <Form method="POST" onSubmit={(event) => this.handleSubmit(event)}>
+                            <Form.Group controlId="description">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control type="text" name="description" placeholder=""
+                                              value={this.state.description}
+                                              onChange={(ev) => this.updateField(ev.target.name, ev.target.value)}
+                                              required autoFocus/>
+                            </Form.Group>
 
-                        <Form.Group controlId="important">
-                            <Form.Check type="checkbox" label="Important" id="important" name="important"
-                                        checked={this.state.important}
-                                        onChange={(ev) => this.updateField(ev.target.name, ev.target.checked)}/>
-                        </Form.Group>
+                            <Form.Group controlId="project">
+                                <Form.Label>Project</Form.Label>
+                                <Form.Control type="text" name="project" placeholder=""
+                                              value={this.state.project}
+                                              onChange={(ev) => this.updateField(ev.target.name, ev.target.value)}/>
+                            </Form.Group>
 
-                        <Form.Group controlId="private">
-                            <Form.Check type="checkbox" label="Private" id="private" name="privateTask"
-                                        onChange={(ev) => this.updateField(ev.target.name, ev.target.checked)}
-                                        checked={this.state.privateTask}/>
-                        </Form.Group>
+                            <Form.Group controlId="important">
+                                <Form.Check type="checkbox" label="Important" id="important" name="important"
+                                            checked={this.state.important}
+                                            onChange={(ev) => this.updateField(ev.target.name, ev.target.checked)}/>
+                            </Form.Group>
 
-                        <Form.Group controlId="deadline-date">
-                            <Form.Label>Deadline</Form.Label>
-                            <Form.Control type="date" name="deadlineDate" value={this.state.deadlineDate}
-                                          onChange={(ev) => this.updateField(ev.target.name, ev.target.value)}/>
-                        </Form.Group>
+                            <Form.Group controlId="private">
+                                <Form.Check type="checkbox" label="Private" id="private" name="privateTask"
+                                            onChange={(ev) => this.updateField(ev.target.name, ev.target.checked)}
+                                            checked={this.state.privateTask}/>
+                            </Form.Group>
 
-                        <Form.Group controlId="deadline-time">
-                            <Form.Control type="time" name="deadlineTime" value={this.state.deadlineTime}
-                                          onChange={(ev) => this.updateField(ev.target.name, ev.target.value)}/>
-                        </Form.Group>
+                            <Form.Group controlId="deadline-date">
+                                <Form.Label>Deadline</Form.Label>
+                                <Form.Control type="date" name="deadlineDate" value={this.state.deadlineDate}
+                                              onChange={(ev) => this.updateField(ev.target.name, ev.target.value)}/>
+                            </Form.Group>
 
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="outline-dark" id="submitButton" type="submit">{this.state.id ? 'Update' : 'Add'}</Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
+                            <Form.Group controlId="deadline-time">
+                                <Form.Control type="time" name="deadlineTime" value={this.state.deadlineTime}
+                                              onChange={(ev) => this.updateField(ev.target.name, ev.target.value)}/>
+                            </Form.Group>
+                            <Form.Group>
+                                <Button variant="outline-dark" type="submit">{this.state.id ? 'Update' : 'Add'}</Button>
+                                <Link to="/tasks">Cancel</Link>
+
+                            </Form.Group>
+                        </Form>
+                    </>
+                )}
+            </AuthContext.Consumer>
         );
 
     }

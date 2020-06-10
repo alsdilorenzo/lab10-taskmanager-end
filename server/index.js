@@ -19,9 +19,9 @@ app.use(express.json())
 
 
 //Authentication endpoint
-app.post('api/login', (req, res) => {
-    const username = this.body.username;
-    const password = this.body.password;
+app.post('/api/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
     userDao.getUser(username)
         .then((user) => {
             if (user === undefined) {
@@ -161,8 +161,7 @@ app.put('/api/tasks/:taskId', (req, res) => {
         res.status(400).end();
     } else {
         const task = req.body;
-        const user = req.user && req.user.user;
-        task.user = user;
+        task.user = req.user && req.user.user;
         taskDao.updateTask(req.params.taskId, task)
             .then((result) => res.status(200).end())
             .catch((err) => res.status(500).json({
