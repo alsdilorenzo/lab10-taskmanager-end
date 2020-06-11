@@ -103,7 +103,7 @@ class App extends React.Component {
         } else {
             API.getTasks(filter)
                 .then((tasks) => {
-                    this.setState({tasks: tasks, filter: filter, projects: this.getProjects(tasks)});
+                    this.setState({tasks: tasks, filter: filter});
                 })
                 .catch((errorObj) => {
                     this.handleErrors(errorObj);
